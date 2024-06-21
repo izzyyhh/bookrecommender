@@ -1,0 +1,34 @@
+.box {
+  position: relative;
+  height: 300px;
+  width: 250px;
+  border: 1px solid #000;
+  margin: 10px;
+  border-radius: 3px;
+}
+
+.author {
+  font-size: 12px;
+}
+
+.heartIcon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 28px;
+}
+
+.heartIcon:hover {
+  cursor: pointer;
+}
+
+.coverIcon {
+  height: 65%;
+  width: 65%;
+  align-self: center;
+}
+
+.starIcon {
+  height: 22px;
+  width: 22px;
+}

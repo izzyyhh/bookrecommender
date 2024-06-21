@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.bigbutton {
+  background-color: rgb(69, 133, 136);
+  border-radius: 3px;
+}
+.inputfield {
+  background-color: rgba(69, 133, 136, 0.25);
+}
+.fullwidth {
+  width: 100vw;
+  height: 100vh;
+}

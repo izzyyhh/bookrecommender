@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start:frontend": "yarn workspace frontend dev",
+    "start:backend": "yarn workspace backend start",
+    "start:docker": "docker compose up --build"
+  }
+}

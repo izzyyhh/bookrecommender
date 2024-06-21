@@ -1,0 +1,517 @@
+openapi: 3.0.1
+info:
+  title: Bookommender
+  description: >-
+    Here you find the endpoint specification in order to communicate with the backend of Bookommender
+    to retrieve book recommendations.
+  version: 1.0.0
+paths:
+  "/":
+    get:
+      summary: Read Root
+      operationId: read_root__get
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  "/recommend":
+    get:
+      summary: Recommend
+      operationId: recommend_recommend_get
+      parameters:
+        - required: false
+          schema:
+            title: Userid
+            type: integer
+          name: userId
+          in: query
+        - required: false
+          schema:
+            title: Itemid
+            type: string
+          name: itemId
+          in: query
+        - required: false
+          schema:
+            title: Numberofitems
+            type: integer
+            default: 10
+          name: numberOfItems
+          in: query
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/recommendItems":
+    get:
+      summary: Recommend Items
+      operationId: recommend_items_recommendItems_get
+      parameters:
+        - required: false
+          schema:
+            title: Age
+            maximum: 100
+            minimum: 5
+            type: integer
+          name: age
+          in: query
+        - required: false
+          schema:
+            title: Userid
+            type: integer
+          name: userId
+          in: query
+        - required: false
+          schema:
+            title: Locationcountry
+            type: string
+          name: locationCountry
+          in: query
+        - required: false
+          deprecated: true
+          schema:
+            title: Locationstate
+            type: string
+          name: locationState
+          in: query
+        - required: false
+          deprecated: true
+          schema:
+            title: Locationcity
+            type: string
+          name: locationCity
+          in: query
+        - required: false
+          schema:
+            title: Itemid
+            type: string
+          name: itemId
+          in: query
+        - required: false
+          schema:
+            title: Numberofitems
+            type: integer
+            default: 10
+          name: numberOfItems
+          in: query
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Recommend Items Recommenditems Get
+                type: array
+                items:
+                  type: string
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/search":
+    get:
+      summary: Search
+      operationId: search_search_get
+      parameters:
+        - required: false
+          schema:
+            title: Searchterm
+            type: string
+          name: searchTerm
+          in: query
+        - required: false
+          schema:
+            title: Userid
+            type: integer
+          name: userId
+          in: query
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Search Search Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Book"
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/user":
+    post:
+      summary: New User
+      operationId: new_user_user_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/user/{user_id}":
+    get:
+      summary: Get Existing User
+      operationId: get_existing_user_user__user_id__get
+      parameters:
+        - required: true
+          schema:
+            title: User Id
+            type: string
+          name: user_id
+          in: path
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/books/{book_id}":
+    get:
+      summary: Book Detail
+      operationId: book_detail_books__book_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Book Id
+            type: string
+          name: book_id
+          in: path
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BookDetails"
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/ratings/{user_id}":
+    get:
+      summary: Get Ratings
+      operationId: get_ratings_ratings__user_id__get
+      parameters:
+        - required: true
+          schema:
+            title: User Id
+            type: string
+          name: user_id
+          in: path
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Ratings Ratings  User Id  Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Rating"
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/ratings":
+    post:
+      summary: Rate Book
+      operationId: rate_book_ratings_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Rating"
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/favorites/{user_id}":
+    get:
+      summary: Get Favorites
+      operationId: get_favorites_favorites__user_id__get
+      parameters:
+        - required: true
+          schema:
+            title: User Id
+            type: string
+          name: user_id
+          in: path
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Favorites Favorites  User Id  Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Book"
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/favorites/":
+    post:
+      summary: Add Favorites
+      operationId: add_favorites_favorites__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Favorite"
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/removefavorite":
+    post:
+      summary: Deletefavorite
+      operationId: deleteFavorite_removefavorite_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Favorite"
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    Book:
+      title: Book
+      required:
+        - bookId
+        - title
+        - author
+        - publisher
+        - year
+        - cover
+      type: object
+      properties:
+        bookId:
+          title: Bookid
+          type: string
+        title:
+          title: Title
+          type: string
+        author:
+          title: Author
+          type: string
+        publisher:
+          title: Publisher
+          type: string
+        year:
+          title: Year
+          type: integer
+        cover:
+          title: Cover
+          type: string
+    BookDetails:
+      title: BookDetails
+      required:
+        - bookId
+        - title
+        - author
+        - publisher
+        - year
+        - cover
+        - excerpt
+        - pages
+        - publishedPlaces
+        - tags
+      type: object
+      properties:
+        bookId:
+          title: Bookid
+          type: string
+        title:
+          title: Title
+          type: string
+        author:
+          title: Author
+          type: string
+        publisher:
+          title: Publisher
+          type: string
+        year:
+          title: Year
+          type: integer
+        cover:
+          title: Cover
+          type: string
+        excerpt:
+          title: Excerpt
+          type: string
+        pages:
+          title: Pages
+          type: integer
+        publishedPlaces:
+          title: Publishedplaces
+          type: array
+          items:
+            type: string
+        tags:
+          title: Tags
+          type: array
+          items:
+            type: string
+    Favorite:
+      title: Favorite
+      required:
+        - userId
+        - bookId
+      type: object
+      properties:
+        userId:
+          title: Userid
+          type: string
+        bookId:
+          title: Bookid
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    Rating:
+      title: Rating
+      required:
+        - userId
+        - bookId
+        - rating
+      type: object
+      properties:
+        userId:
+          title: Userid
+          type: string
+        bookId:
+          title: Bookid
+          type: string
+        rating:
+          title: Rating
+          type: integer
+    User:
+      title: User
+      required:
+        - userId
+        - age
+        - country
+        - favoriteAuthor
+        - favoritePublisher
+        - favorites
+      type: object
+      properties:
+        userId:
+          title: Userid
+          type: string
+        age:
+          title: Age
+          type: integer
+        country:
+          title: Country
+          type: string
+        favoriteAuthor:
+          title: Favoriteauthor
+          type: string
+        favoritePublisher:
+          title: Favoritepublisher
+          type: string
+        favorites:
+          title: Favorites
+          type: array
+          items:
+            type: integer
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string

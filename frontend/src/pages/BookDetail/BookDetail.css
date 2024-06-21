@@ -1,0 +1,14 @@
+.bookTitleWidth {
+  max-width: 500px;
+}
+
+.backArrow {
+  width: 40px;
+}
+.backArrow:hover {
+  cursor: pointer;
+}
+
+#root {
+  width: 100%;
+}

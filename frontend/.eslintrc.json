@@ -1,0 +1,28 @@
+{
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+      "prettier",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended"
+    ],
+    "rules": {
+      "prefer-const": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "warn",
+      "@typescript-eslint/explicit-function-return-type": "warn",
+      "@typescript-eslint/no-explicit-any": ["off"],
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/prop-types": "off",
+      "no-console": "warn"
+    },
+    "env": {
+      "jest": true,
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "ignorePatterns": []
+  }
+  
